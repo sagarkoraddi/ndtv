@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="tests">
+    <test name="Testclass">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.ndtv.test.WeatherTest"/>
+        </classes>
+    </test>
+</suite>
