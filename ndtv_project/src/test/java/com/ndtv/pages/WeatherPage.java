@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
 /**
  * 
  * @author Sagar
@@ -87,9 +91,46 @@ public class WeatherPage extends BasePage{
 	/**
 	 * Get weather details from the Map.
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public String getCityWeatherDetails() {
+	public String getCityWeatherDetails() throws InterruptedException {
+		Thread.sleep(3000);
 		String weatherDet= driver.findElement(weatherDetails).getText();	
 		return weatherDet;
 	}
+	
+	public String getCityWeatherDetailsFromAPI() {
+
+		 RestAssured.baseURI = "http://api.openweathermap.org/data/2.5/";
+		 
+		 RequestSpecification httpRequest = RestAssured.given();
+
+		 Response response = httpRequest.queryParam("q","Bengaluru")
+	                           .queryParam("appid", "7fe67bf08c80ded756e598d6f8fedaea")
+	                           .get("/weather");
+		 String jsonString = response.asString();
+		 String temp= response.jsonPath().get("temp");
+		
+		 System.out.println(response.asString());
+		 System.out.println(temp); 
+		return jsonString;
+
+	}
+	
+	public String getCityWeatherDetailsFromAPIWithCustomizeParameters() {
+
+		 RestAssured.baseURI = "http://api.openweathermap.org/data/2.5/";
+		 
+		 RequestSpecification httpRequest = RestAssured.given();
+
+		 Response response = httpRequest.queryParam("q","Bengaluru")
+	                           .queryParam("appid", "7fe67bf08c80ded756e598d6f8fedaea")
+	                           .get("/weather");
+		 String jsonString = response.asString();
+		 System.out.println(response.asString());
+		 System.out.println(response.getStatusCode()); 
+		return jsonString;
+
+	}
+
 }

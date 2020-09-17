@@ -10,10 +10,10 @@ import com.ndtv.pages.WeatherPage;
  *
  */
 public class WeatherTest extends BaseTest {
-	
-	String city ="Bengaluru";
+
+	String city = "Bengaluru";
 	@Test
-	public void getDetailsFromWeather() {
+	public void getDetailsFromWeather() throws InterruptedException {
 		WeatherPage weatherPage = new WeatherPage(driver);
 		weatherPage.enterPinYourCity(city);
 		weatherPage.clickOnCityMap();
@@ -22,6 +22,13 @@ public class WeatherTest extends BaseTest {
 		
 		Assert.assertTrue(weatherDetails.contains(city), city+" :: City is not listed in the Map" );
 		Assert.assertTrue(!weatherDetails.isEmpty(), "Weather details is not showing up any details");
+		
+		System.out.println("***************Validating it from API*******************");
+		String jsonString =  weatherPage.getCityWeatherDetailsFromAPI();
+		Assert.assertEquals(jsonString.contains("Bengaluru"),true);
+	    Assert.assertEquals(jsonString.contains("temp"),true);
+		
+		
 	}
 
 }

@@ -9,7 +9,6 @@ public class BasePage extends Page {
 
 	public BasePage(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

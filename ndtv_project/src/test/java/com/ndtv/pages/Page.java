@@ -17,7 +17,6 @@ public abstract class Page {
 	}
 	
 	//abstract methods
-	
 	public abstract String getPageTitle();
 	
 	public abstract WebElement getElement(By locator);
