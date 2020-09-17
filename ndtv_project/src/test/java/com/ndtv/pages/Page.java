@@ -15,7 +15,6 @@ public abstract class Page {
 		this.wait = new WebDriverWait(this.driver, 15);
 		
 	}
-	
 	// abstract methods
 	public abstract String getPageTitle();
 	
